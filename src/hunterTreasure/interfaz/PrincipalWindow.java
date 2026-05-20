@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PrincipalWindow extends JFrame {
+
+    private MenuPrincipal menuPrincipal;
+    private VistaJuego vistaJuego;
+
     public PrincipalWindow() {
         super("Hunter Treasure");
         setResizable(false);
@@ -14,6 +18,9 @@ public class PrincipalWindow extends JFrame {
         Image icon = new ImageIcon(getClass().getResource("/imagenes/ElementosJuego/logotipo.jpg")).getImage();
         setIconImage(icon);
         setVisible(true);
+
+        menuPrincipal = new MenuPrincipal(this);
+        cambiarPanel(menuPrincipal);
     }
 
     public void cambiarPanel(JPanel panel) {
