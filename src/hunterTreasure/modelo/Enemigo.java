@@ -1,26 +1,25 @@
 package hunterTreasure.modelo;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Enemigo {
     private String nombreEnemigo;
     private int velocidadEnemigo;
     private int vidaEnemigo;
-    private int dañoEnemigo;
-    private int tamañoEnemigo;
+    private int danoEnemigo;
+    private int tamanoEnemigo;
     private boolean portadorLlave;
     private int posicionXEnemigo;
     private int posicionYEnemigo;
     private int tipoAtaque;
     private Image ImagenEnemigo;
 
-    public Enemigo(String nombreEnemigo, int velocidadEnemigo, int vidaEnemigo, int dañoEnemigo, int tamañoEnemigo, boolean portadorLlave, int posicionXEnemigo, int posicionYEnemigo, int tipoAtaque, Image imagenEnemigo) {
+    public Enemigo(String nombreEnemigo, int velocidadEnemigo, int vidaEnemigo, int danoEnemigo, int tamanoEnemigo, boolean portadorLlave, int posicionXEnemigo, int posicionYEnemigo, int tipoAtaque, Image imagenEnemigo) {
         this.nombreEnemigo = nombreEnemigo;
         this.velocidadEnemigo = velocidadEnemigo;
         this.vidaEnemigo = vidaEnemigo;
-        this.dañoEnemigo = dañoEnemigo;
-        this.tamañoEnemigo = tamañoEnemigo;
+        this.danoEnemigo = danoEnemigo;
+        this.tamanoEnemigo = tamanoEnemigo;
         this.portadorLlave = portadorLlave;
         this.posicionXEnemigo = posicionXEnemigo;
         this.posicionYEnemigo = posicionYEnemigo;
@@ -52,20 +51,20 @@ public class Enemigo {
         this.vidaEnemigo = vidaEnemigo;
     }
 
-    public int getDañoEnemigo() {
-        return dañoEnemigo;
+    public int getDanoEnemigo() {
+        return danoEnemigo;
     }
 
-    public void setDañoEnemigo(int dañoEnemigo) {
-        this.dañoEnemigo = dañoEnemigo;
+    public void setDanoEnemigo(int danoEnemigo) {
+        this.danoEnemigo = danoEnemigo;
     }
 
-    public int getTamañoEnemigo() {
-        return tamañoEnemigo;
+    public int getTamanoEnemigo() {
+        return tamanoEnemigo;
     }
 
-    public void setTamañoEnemigo(int tamañoEnemigo) {
-        this.tamañoEnemigo = tamañoEnemigo;
+    public void setTamanoEnemigo(int tamanoEnemigo) {
+        this.tamanoEnemigo = tamanoEnemigo;
     }
 
     public boolean isPortadorLlave() {

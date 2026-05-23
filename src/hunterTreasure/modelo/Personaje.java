@@ -5,19 +5,19 @@ import java.awt.*;
 public class Personaje {
     private int posicionXPersonaje;
     private int posicionYPersonaje;
-    private int tamañoPersonaje;
+    private final int TAMANO_PERSONAJE;
     private String nombrePersonaje;
     private int velocidadPersonaje;
     private int vidaPersonaje;
-    private int dañoPersonaje;
+    private int danoPersonaje;
     private Image imagenPersonaje;
 
-    public Personaje(int posicionXPersonaje, int posicionYPersonaje, int velocidadPersonaje, int vidaPersonaje, int tamañoPersonaje, Image imagenPersonaje) {
+    public Personaje(int posicionXPersonaje, int posicionYPersonaje, int velocidadPersonaje, int vidaPersonaje, int TAMANO_PERSONAJE, Image imagenPersonaje) {
         this.posicionXPersonaje = posicionXPersonaje;
         this.posicionYPersonaje = posicionYPersonaje;
         this.velocidadPersonaje = velocidadPersonaje;
         this.vidaPersonaje = vidaPersonaje;
-        this.tamañoPersonaje = tamañoPersonaje;
+        this.TAMANO_PERSONAJE = TAMANO_PERSONAJE;
         this.imagenPersonaje = imagenPersonaje;
     }
 
@@ -29,22 +29,14 @@ public class Personaje {
         this.posicionYPersonaje = posicionYPersonaje;
     }
 
-    public void setTamañoPersonaje(int tamañoPersonaje) {
-        this.tamañoPersonaje = tamañoPersonaje;
-    }
+    public void setNombrePersonaje(String nombrePersonaje) {this.nombrePersonaje = nombrePersonaje;}
 
-    public void setNombrePersonaje(String nombrePersonaje) {
-        this.nombrePersonaje = nombrePersonaje;
-    }
-
-    public void setVelocidadPersonaje(int velocidadPersonaje) {
-        this.velocidadPersonaje = velocidadPersonaje;
-    }
+    public void setVelocidadPersonaje(int velocidadPersonaje) {this.velocidadPersonaje = velocidadPersonaje;}
 
     public void setVidaPersonaje(int vidaPersonaje) {this.vidaPersonaje = Math.max(0, vidaPersonaje);}
 
-    public void dañoPersonaje(int dañoPersonaje) {
-        this.dañoPersonaje = dañoPersonaje;
+    public void danoPersonaje(int dañoPersonaje) {
+        this.danoPersonaje = dañoPersonaje;
     }
 
     public void setImagenPersonaje(Image imagenPersonaje) {
@@ -59,13 +51,11 @@ public class Personaje {
         return posicionYPersonaje;
     }
 
-    public int getTamañoPersonaje() {
-        return tamañoPersonaje;
+    public int getTAMANO_PERSONAJE() {
+        return TAMANO_PERSONAJE;
     }
 
-    public String getNombrePersonaje() {
-        return nombrePersonaje;
-    }
+    public String getNombrePersonaje() {return nombrePersonaje;}
 
     public int getVelocidadPersonaje() {
         return velocidadPersonaje;
@@ -75,8 +65,8 @@ public class Personaje {
         return vidaPersonaje;
     }
 
-    public int dañoPersonaje() {
-        return dañoPersonaje;
+    public int danoPersonaje() {
+        return danoPersonaje;
     }
 
     public Image getImagenPersonaje() {

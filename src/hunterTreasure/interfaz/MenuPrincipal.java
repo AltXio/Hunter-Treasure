@@ -2,24 +2,22 @@ package hunterTreasure.interfaz;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
+import java.util.Objects;
 
 public class MenuPrincipal extends JPanel {
 
-    private Image imagenFondo;
-    private PrincipalWindow principalWindow;
+    private final Image IMAGENFONDO;
 
     public MenuPrincipal(PrincipalWindow principalWindow) {
-        this.principalWindow = principalWindow;
-        ImageIcon fondo = new ImageIcon(getClass().getResource("/imagenes/ElementosJuego/fondoMenu.jpg"));
-        imagenFondo = fondo.getImage();
+        ImageIcon fondo = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/ElementosJuego/fondoMenu.jpg")));
+        IMAGENFONDO = fondo.getImage();
         setLayout(null);
 
         JButton botonStart = new JButton("Empezar");
         botonStart.setFocusable(false);
         botonStart.setBounds(300, 300, 200, 50);
         add(botonStart);
-        botonStart.addActionListener(e -> {
+        botonStart.addActionListener(_ -> {
                 String nombreUsuario = JOptionPane.showInputDialog("Introduce tu nombre: ");
                 principalWindow.cambiarPanel(new VistaJuego(principalWindow, nombreUsuario));
         });
@@ -28,7 +26,7 @@ public class MenuPrincipal extends JPanel {
         botonInstrucciones.setFocusable(false);
         botonInstrucciones.setBounds(300, 375, 200, 50);
         add(botonInstrucciones);
-        botonInstrucciones.addActionListener(e ->
+        botonInstrucciones.addActionListener(_ ->
         JOptionPane.showMessageDialog(this,
                 "<html>"+
                         "<b>MOVIMIENTO:</b<br><br>" +
@@ -44,12 +42,12 @@ public class MenuPrincipal extends JPanel {
         botonSalir.setFocusable(false);
         botonSalir.setBounds(300, 450, 200, 50);
         add(botonSalir);
-        botonSalir.addActionListener(e -> System.exit(0));
+        botonSalir.addActionListener(_ -> System.exit(0));
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(imagenFondo, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(IMAGENFONDO, 0, 0, getWidth(), getHeight(), this);
     }
 }
