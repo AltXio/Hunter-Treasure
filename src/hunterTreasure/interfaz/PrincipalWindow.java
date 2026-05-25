@@ -13,7 +13,8 @@ public class PrincipalWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        Image icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/ElementosJuego/logotipo.jpg"))).getImage();
+        Image icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/ElementosJuego/logotipo.jpg"))).getImage();
         setIconImage(icon);
         setVisible(true);
 

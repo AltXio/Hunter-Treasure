@@ -5,19 +5,17 @@ import java.awt.*;
 public class Personaje {
     private int posicionXPersonaje;
     private int posicionYPersonaje;
-    private final int TAMANO_PERSONAJE;
-    private String nombrePersonaje;
+    private int tamanoPersonaje;
     private int velocidadPersonaje;
     private int vidaPersonaje;
-    private int danoPersonaje;
     private Image imagenPersonaje;
 
-    public Personaje(int posicionXPersonaje, int posicionYPersonaje, int velocidadPersonaje, int vidaPersonaje, int TAMANO_PERSONAJE, Image imagenPersonaje) {
+    public Personaje(int posicionXPersonaje, int posicionYPersonaje, int velocidadPersonaje, int vidaPersonaje, int tamanoPersonaje, Image imagenPersonaje) {
         this.posicionXPersonaje = posicionXPersonaje;
         this.posicionYPersonaje = posicionYPersonaje;
         this.velocidadPersonaje = velocidadPersonaje;
         this.vidaPersonaje = vidaPersonaje;
-        this.TAMANO_PERSONAJE = TAMANO_PERSONAJE;
+        this.tamanoPersonaje = tamanoPersonaje;
         this.imagenPersonaje = imagenPersonaje;
     }
 
@@ -29,18 +27,8 @@ public class Personaje {
         this.posicionYPersonaje = posicionYPersonaje;
     }
 
-    public void setNombrePersonaje(String nombrePersonaje) {this.nombrePersonaje = nombrePersonaje;}
-
-    public void setVelocidadPersonaje(int velocidadPersonaje) {this.velocidadPersonaje = velocidadPersonaje;}
-
-    public void setVidaPersonaje(int vidaPersonaje) {this.vidaPersonaje = Math.max(0, vidaPersonaje);}
-
-    public void danoPersonaje(int dañoPersonaje) {
-        this.danoPersonaje = dañoPersonaje;
-    }
-
-    public void setImagenPersonaje(Image imagenPersonaje) {
-        this.imagenPersonaje = imagenPersonaje;
+    public void setVidaPersonaje(int vidaPersonaje) {
+        this.vidaPersonaje = Math.max(0, vidaPersonaje);
     }
 
     public int getPosicionXPersonaje() {
@@ -51,11 +39,9 @@ public class Personaje {
         return posicionYPersonaje;
     }
 
-    public int getTAMANO_PERSONAJE() {
-        return TAMANO_PERSONAJE;
+    public int getTamanoPersonaje() {
+        return tamanoPersonaje;
     }
-
-    public String getNombrePersonaje() {return nombrePersonaje;}
 
     public int getVelocidadPersonaje() {
         return velocidadPersonaje;
@@ -63,10 +49,6 @@ public class Personaje {
 
     public int getVidaPersonaje() {
         return vidaPersonaje;
-    }
-
-    public int danoPersonaje() {
-        return danoPersonaje;
     }
 
     public Image getImagenPersonaje() {

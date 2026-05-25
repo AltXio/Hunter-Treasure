@@ -19,70 +19,104 @@ public class VistaJuego extends JPanel {
     public static final int LIMITE_X = 89;
 
     private final String NOMBRE_USUARIO;
-    private final Image FONDO_ARENA;
-    private final Image FONDO_AGUA;
-    private final Image barco;
-    private final Personaje personaje;
-    private Timer timer;
+    private Image fondoArena;
+    private Image fondoAgua;
+    private Image barco;
+    private Image imgBarril;
+    private Image imgCofre;
+    private Image imgMapa;
+    private Image imgMoneda;
+    private Image imgLlave;
+    private Image imgPuertaOpen;
+    private Image imgPuertaClose;
+    private Personaje personaje;
     private boolean upPressed, downPressed, leftPressed, rightPressed;
-    private final ArrayList<Enemigo> enemigos;
-    private boolean inmunidad = false;
+    private ArrayList<Enemigo> enemigos = new ArrayList<>();
+    private ArrayList<Proyectil> proyectiles = new ArrayList<>();
+    private ArrayList<ObjetoColeccionable> objetoColeccionable = new ArrayList<>();
     private int contadorInmunidad = 0;
-    private final ArrayList<Proyectil> proyectiles = new ArrayList<>();
     private int ultimaDireccionX = 5;
     private int ultimaDireccionY = 0;
-    private final ArrayList<ObjetoColeccionable> objetoColeccionable = new ArrayList<>();
-    private final Image imgBarril;
-    private final Image imgCofre;
-    private final Image imgMapa;
-    private final Image imgMoneda;
-
+    private int puntuacionTotal = 0;
+    private int enemigosEliminados = 0;
+    private boolean tieneLlave = false;
+    private boolean inmunidad = false;
+    private Timer timer;
 
     public VistaJuego(PrincipalWindow principalWindow, String NOMBRE_USUARIO) {
         this.NOMBRE_USUARIO = NOMBRE_USUARIO;
 
-        FONDO_ARENA = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/mapas/arenaMapa.jpg"))).getImage();
-        FONDO_AGUA = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/mapas/aguaMapa.jpg"))).getImage();
-        barco = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/elementosJuego/barcoTierra.png"))).getImage();
+        fondoArena = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/mapas/arenaMapa.jpg"))).getImage();
+        fondoAgua = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/mapas/aguaMapa.jpg"))).getImage();
+        barco = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/elementosJuego/barcoTierra.png"))).getImage();
 
-        Image imgPersonaje = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/personajes/pirata.png"))).getImage();
-        personaje = new Personaje(108, 280, 5, 3, 150, imgPersonaje);
+        Image imgPersonaje = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/personajes/pirata.png"))).getImage();
 
-        Image imgEnemigoCalamar = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/enemigos/calamar.png"))).getImage();
-        Image imgEnemigoCangrejo = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/enemigos/cangrejoSmash.png"))).getImage();
-        Image imgEnemigoEsqueleto = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/enemigos/EsqueletoEnemigo.png"))).getImage();
-        Image imgEnemigoPirata = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/enemigos/pirataAsesino.gif"))).getImage();
+        personaje = new Personaje(
+                108,
+                280,
+                5,
+                3,
+                150,
+                imgPersonaje);
 
-        imgBarril = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/objetos/barril.png"))).getImage();
-        imgCofre = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/objetos/cofre.png"))).getImage();
-        imgMapa = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/objetos/mapa.png"))).getImage();
-        imgMoneda = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/objetos/moneda.png"))).getImage();
+        Image imgEnemigoCalamar = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/enemigos/calamar.png"))).getImage();
+        Image imgEnemigoCangrejo = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/enemigos/cangrejoSmash.png"))).getImage();
+        Image imgEnemigoEsqueleto = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/enemigos/EsqueletoEnemigo.png"))).getImage();
+        Image imgEnemigoPirata = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/enemigos/pirataAsesino.gif"))).getImage();
 
+        imgBarril = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/objetos/barril.png"))).getImage();
+        imgCofre = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/objetos/cofre.png"))).getImage();
+        imgMapa = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/objetos/mapa.png"))).getImage();
+        imgMoneda = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/objetos/moneda.png"))).getImage();
+
+        imgPuertaOpen = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/elementosJuego/puertaAbierta.png"))).getImage();
+        imgPuertaClose = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/elementosJuego/puertaCerrada.png"))).getImage();
+        imgLlave = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/objetos/llave.png"))).getImage();
 
         Random random = new Random();
         random.nextInt(400);
         random.nextInt(700 - ALTO_HUD - 130);
-        enemigos = new ArrayList<>();
 
-        enemigos.add(new Enemigo("Calamar", 2, 10, 2, 170, false,
+        enemigos.add(new Enemigo(2, 10, 170, false,
                 random.nextInt(400) + 400,
                 random.nextInt(570) + ALTO_HUD,
-                2, imgEnemigoCalamar));
+                imgEnemigoCalamar));
 
-        enemigos.add(new Enemigo("Cangrejo", 2, 13, 1, 130, false,
+        enemigos.add(new Enemigo(2, 13, 130, false,
                 random.nextInt(400) + 400,
                 random.nextInt(570) + ALTO_HUD,
-                1, imgEnemigoCangrejo));
+                imgEnemigoCangrejo));
 
-        enemigos.add(new Enemigo("Esqueleto", 1, 20, 1, 130, true,
+        enemigos.add(new Enemigo(1, 20, 130, false,
                 random.nextInt(400) + 400,
                 random.nextInt(570) + ALTO_HUD,
-                1, imgEnemigoEsqueleto));
+                imgEnemigoEsqueleto));
 
-        enemigos.add(new Enemigo("Pirata", 2, 16, 2, 150, false,
+        enemigos.add(new Enemigo(2, 16, 150, false,
                 random.nextInt(400) + 400,
                 random.nextInt(570) + ALTO_HUD,
-                2, imgEnemigoPirata));
+                imgEnemigoPirata));
+
+        if (!enemigos.isEmpty()) {
+            int indiceAleatorio = random.nextInt(enemigos.size());
+            enemigos.get(indiceAleatorio).setPortadorLlave(true);
+        }
 
         for (int i = 0; i < 2; i++) {
             int x = random.nextInt(670) + LIMITE_X;
@@ -139,10 +173,13 @@ public class VistaJuego extends JPanel {
                     ultimaDireccionY = 0;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    int posX = personaje.getPosicionXPersonaje() + personaje.getTAMANO_PERSONAJE() / 2;
-                    int posY = personaje.getPosicionYPersonaje() + personaje.getTAMANO_PERSONAJE() / 2;
+                    int posX = personaje.getPosicionXPersonaje() + personaje.getTamanoPersonaje() / 2;
+                    int posY = personaje.getPosicionYPersonaje() + personaje.getTamanoPersonaje() / 2;
 
-                    proyectiles.add(new Proyectil(posX, posY, ultimaDireccionX * 2, ultimaDireccionY * 2, 10));
+                    proyectiles.add(new Proyectil(posX, posY,
+                            ultimaDireccionX * 2,
+                            ultimaDireccionY * 2,
+                            10));
                 }
             }
 
@@ -158,6 +195,7 @@ public class VistaJuego extends JPanel {
 
         // 60fps = 16ms
         timer = new Timer(16, _ -> {
+
             int vel = personaje.getVelocidadPersonaje();
             if (upPressed) personaje.moverPersonaje(0, -vel);
             if (downPressed) personaje.moverPersonaje(0, +vel);
@@ -167,12 +205,12 @@ public class VistaJuego extends JPanel {
             //limites
             if (personaje.getPosicionXPersonaje() < LIMITE_X)
                 personaje.setPosicionXPersonaje(LIMITE_X);
-            if (personaje.getPosicionXPersonaje() > getWidth() - personaje.getTAMANO_PERSONAJE())
-                personaje.setPosicionXPersonaje(getWidth() - personaje.getTAMANO_PERSONAJE());
+            if (personaje.getPosicionXPersonaje() > getWidth() - personaje.getTamanoPersonaje())
+                personaje.setPosicionXPersonaje(getWidth() - personaje.getTamanoPersonaje());
             if (personaje.getPosicionYPersonaje() < ALTO_HUD)
                 personaje.setPosicionYPersonaje(ALTO_HUD);
-            if (personaje.getPosicionYPersonaje() > getHeight() - personaje.getTAMANO_PERSONAJE())
-                personaje.setPosicionYPersonaje(getHeight() - personaje.getTAMANO_PERSONAJE());
+            if (personaje.getPosicionYPersonaje() > getHeight() - personaje.getTamanoPersonaje())
+                personaje.setPosicionYPersonaje(getHeight() - personaje.getTamanoPersonaje());
 
             enemigos.forEach(enemigo ->
                     enemigo.moverEnemigo(personaje.getPosicionXPersonaje(), personaje.getPosicionYPersonaje()));
@@ -186,19 +224,34 @@ public class VistaJuego extends JPanel {
                 Proyectil proyectil = proyectiles.get(i);
 
                 Rectangle areaProyectil = new Rectangle(
-                        proyectil.getPosicionXDisparo(), proyectil.getPosicionYDisparo(), proyectil.getTamanoDisparo(), proyectil.getTamanoDisparo()
+                        proyectil.getPosicionXDisparo(),
+                        proyectil.getPosicionYDisparo(),
+                        proyectil.getTamanoDisparo(),
+                        proyectil.getTamanoDisparo()
                 );
 
                 for (Enemigo enemigo : enemigos) {
                     Rectangle areaEnemigo = new Rectangle(
-                            enemigo.getPosicionXEnemigo() + personaje.getTAMANO_PERSONAJE() / 4,
-                            enemigo.getPosicionYEnemigo() + personaje.getTAMANO_PERSONAJE() / 4,
-                            enemigo.getTamanoEnemigo() - personaje.getTAMANO_PERSONAJE() / 4 * 2,
-                            enemigo.getTamanoEnemigo() - personaje.getTAMANO_PERSONAJE() / 4 * 2
+                            enemigo.getPosicionXEnemigo() + personaje.getTamanoPersonaje() / 4,
+                            enemigo.getPosicionYEnemigo() + personaje.getTamanoPersonaje() / 4,
+                            enemigo.getTamanoEnemigo() - personaje.getTamanoPersonaje() / 4 * 2,
+                            enemigo.getTamanoEnemigo() - personaje.getTamanoPersonaje() / 4 * 2
                     );
 
                     if (areaProyectil.intersects(areaEnemigo)) {
                         enemigo.setVidaEnemigo(enemigo.getVidaEnemigo() - 1);
+
+                        if (enemigo.getVidaEnemigo() <= 0) {
+                            enemigosEliminados++;
+                            puntuacionTotal += 10;
+
+                            if (enemigo.isPortadorLlave()) {
+                                int xLlave = enemigo.getPosicionXEnemigo();
+                                int yLlave = enemigo.getPosicionYEnemigo();
+                                objetoColeccionable.add(new ObjetoColeccionable(
+                                        "llave", xLlave, yLlave, 35));
+                            }
+                        }
 
                         proyectiles.remove(i);
                         i--;
@@ -223,15 +276,15 @@ public class VistaJuego extends JPanel {
                     Rectangle areaPersonaje = new Rectangle(
                             personaje.getPosicionXPersonaje() + enemigo.getTamanoEnemigo() / 4,
                             personaje.getPosicionYPersonaje() + enemigo.getTamanoEnemigo() / 4,
-                            personaje.getTAMANO_PERSONAJE() - enemigo.getTamanoEnemigo() / 4 * 2,
-                            personaje.getTAMANO_PERSONAJE() - enemigo.getTamanoEnemigo() / 4 * 2
+                            personaje.getTamanoPersonaje() - enemigo.getTamanoEnemigo() / 4 * 2,
+                            personaje.getTamanoPersonaje() - enemigo.getTamanoEnemigo() / 4 * 2
                     );
 
                     Rectangle areaEnemigo = new Rectangle(
-                            enemigo.getPosicionXEnemigo() + personaje.getTAMANO_PERSONAJE() / 4,
-                            enemigo.getPosicionYEnemigo() + personaje.getTAMANO_PERSONAJE() / 4,
-                            enemigo.getTamanoEnemigo() - personaje.getTAMANO_PERSONAJE() / 4 * 2,
-                            enemigo.getTamanoEnemigo() - personaje.getTAMANO_PERSONAJE() / 4 * 2
+                            enemigo.getPosicionXEnemigo() + personaje.getTamanoPersonaje() / 4,
+                            enemigo.getPosicionYEnemigo() + personaje.getTamanoPersonaje() / 4,
+                            enemigo.getTamanoEnemigo() - personaje.getTamanoPersonaje() / 4 * 2,
+                            enemigo.getTamanoEnemigo() - personaje.getTamanoPersonaje() / 4 * 2
                     );
                     if (areaPersonaje.intersects(areaEnemigo)) {
                         personaje.setVidaPersonaje(personaje.getVidaPersonaje() - 1);
@@ -248,21 +301,47 @@ public class VistaJuego extends JPanel {
                     Rectangle areaObjeto = new Rectangle(
                             objeto.getPosicionXObjeto(),
                             objeto.getPosicionYObjeto(),
-                            objeto.getTamanoObjeto() - 10 * 2,
-                            objeto.getTamanoObjeto() - 10 * 2
+                            objeto.getTamanoObjeto() - (10 * 2),
+                            objeto.getTamanoObjeto() - (10 * 2)
                     );
 
-                    int reduccionHitBoxPersonaje = personaje.getTAMANO_PERSONAJE() / 3;
+                    int reduccionHitBoxPersonaje = personaje.getTamanoPersonaje() / 3;
                     Rectangle areaRecoleccion = new Rectangle(
                             personaje.getPosicionXPersonaje() + reduccionHitBoxPersonaje,
                             personaje.getPosicionYPersonaje() + reduccionHitBoxPersonaje,
-                            personaje.getTAMANO_PERSONAJE() - (reduccionHitBoxPersonaje * 2),
-                            personaje.getTAMANO_PERSONAJE() - (reduccionHitBoxPersonaje * 2)
+                            personaje.getTamanoPersonaje() - (reduccionHitBoxPersonaje * 2),
+                            personaje.getTamanoPersonaje() - (reduccionHitBoxPersonaje * 2)
                     );
 
                     if (areaRecoleccion.intersects(areaObjeto)) {
                         objeto.setRecolectado(true);
+
+                        if (objeto.getTipo().equalsIgnoreCase("llave")) {
+                            tieneLlave = true;
+                        }
+
+                        switch (objeto.getTipo().toLowerCase()) {
+                            case "moneda" -> puntuacionTotal += 15;
+                            case "barril" -> puntuacionTotal += 10;
+                            case "mapa" -> puntuacionTotal += 5;
+                            case "cofre" -> puntuacionTotal += 530;
+                        }
                     }
+                }
+            }
+
+            if (tieneLlave) {
+                Rectangle areaPuerta = new Rectangle(720, 80, 50, 50);
+                Rectangle areaPersonaje = new Rectangle(
+                        personaje.getPosicionXPersonaje(),
+                        personaje.getPosicionYPersonaje(),
+                        personaje.getTamanoPersonaje(),
+                        personaje.getTamanoPersonaje()
+                );
+
+                if (areaPersonaje.intersects(areaPuerta)) {
+                    timer.stop();
+                    principalWindow.cambiarPanel(new GameVictory(principalWindow, NOMBRE_USUARIO));
                 }
             }
 
@@ -283,32 +362,44 @@ public class VistaJuego extends JPanel {
         int anchoArena = getWidth() - anchoAgua;
         int xBarco = anchoAgua - 150 / 2;
         int yBarco = getHeight() / 2 - 150 / 2;
-        g.drawImage(FONDO_AGUA, 0, 0, anchoAgua, getHeight(), this);
-        g.drawImage(FONDO_ARENA, anchoAgua, 0, anchoArena, getHeight(), this);
+        g.drawImage(fondoAgua, 0, 0, anchoAgua, getHeight(), this);
+        g.drawImage(fondoArena, anchoAgua, 0, anchoArena, getHeight(), this);
         g.drawImage(barco, xBarco, yBarco, 150, 150, this);
 
         g.setColor(new Color(0, 0, 0, 180));
         g.fillRect(0, 0, getWidth(), ALTO_HUD);
 
         g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", Font.BOLD, 16));
+        g.setFont(new Font("Arial", Font.BOLD, 14));
         g.drawString("Jugador: " + NOMBRE_USUARIO, 20, 35);
-        g.drawString("Vidas: " + personaje.getVidaPersonaje(), 300, 35);
-        g.drawString("Enemigos: " + 0, 500, 35);
+        g.drawString("Vidas: " + personaje.getVidaPersonaje(), 250, 35);
+        g.drawString("Enemigos: " + enemigosEliminados, 400, 35);
+        g.drawString("Puntos: " + puntuacionTotal + " pts", 570, 35);
 
         for (Enemigo enemigo : enemigos) {
-            g.drawImage(enemigo.getImagenEnemigo(), enemigo.getPosicionXEnemigo(), enemigo.getPosicionYEnemigo(),
-                    enemigo.getTamanoEnemigo(), enemigo.getTamanoEnemigo(), this);
+            g.drawImage(enemigo.getImagenEnemigo(),
+                    enemigo.getPosicionXEnemigo(),
+                    enemigo.getPosicionYEnemigo(),
+                    enemigo.getTamanoEnemigo(),
+                    enemigo.getTamanoEnemigo(),
+                    this);
         }
 
         if (!inmunidad || contadorInmunidad % 2 == 0) {
-            g.drawImage(personaje.getImagenPersonaje(), personaje.getPosicionXPersonaje(), personaje.getPosicionYPersonaje(),
-                    personaje.getTAMANO_PERSONAJE(), personaje.getTAMANO_PERSONAJE(), this);
+            g.drawImage(personaje.getImagenPersonaje(),
+                    personaje.getPosicionXPersonaje(),
+                    personaje.getPosicionYPersonaje(),
+                    personaje.getTamanoPersonaje(),
+                    personaje.getTamanoPersonaje(),
+                    this);
         }
 
         g.setColor(Color.blue);
         proyectiles.forEach(proyectil ->
-                g.fillOval(proyectil.getPosicionXDisparo(), proyectil.getPosicionYDisparo(), proyectil.getTamanoDisparo(), proyectil.getTamanoDisparo()));
+                g.fillOval(proyectil.getPosicionXDisparo(),
+                        proyectil.getPosicionYDisparo(),
+                        proyectil.getTamanoDisparo(),
+                        proyectil.getTamanoDisparo()));
 
         for (ObjetoColeccionable objeto : objetoColeccionable) {
             if (!objeto.isRecolectado()) {
@@ -320,6 +411,7 @@ public class VistaJuego extends JPanel {
                             objeto.getTamanoObjeto(),
                             objeto.getTamanoObjeto(),
                             this);
+
                 } else if (objeto.getTipo().equalsIgnoreCase("cofre")) {
                     g.drawImage(
                             imgCofre,
@@ -328,6 +420,7 @@ public class VistaJuego extends JPanel {
                             objeto.getTamanoObjeto(),
                             objeto.getTamanoObjeto(),
                             this);
+
                 } else if (objeto.getTipo().equalsIgnoreCase("mapa")) {
                     g.drawImage(
                             imgMapa,
@@ -336,6 +429,7 @@ public class VistaJuego extends JPanel {
                             objeto.getTamanoObjeto(),
                             objeto.getTamanoObjeto(),
                             this);
+
                 } else if (objeto.getTipo().equalsIgnoreCase("moneda")) {
                     g.drawImage(
                             imgMoneda,
@@ -344,8 +438,27 @@ public class VistaJuego extends JPanel {
                             objeto.getTamanoObjeto(),
                             objeto.getTamanoObjeto(),
                             this);
+
+                } else if (objeto.getTipo().equalsIgnoreCase("llave")) {
+                    g.drawImage(imgLlave,
+                            objeto.getPosicionXObjeto(),
+                            objeto.getPosicionYObjeto(),
+                            objeto.getTamanoObjeto(),
+                            objeto.getTamanoObjeto(),
+                            this);
                 }
             }
         }
+
+        int xPuerta = 720;
+        int yPuerta = 80;
+        int tamPuerta = 50;
+
+        if (tieneLlave) {
+            g.drawImage(imgPuertaOpen, xPuerta, yPuerta, tamPuerta, tamPuerta, this);
+        } else {
+            g.drawImage(imgPuertaClose, xPuerta, yPuerta, tamPuerta, tamPuerta, this);
+        }
+
     }
 }

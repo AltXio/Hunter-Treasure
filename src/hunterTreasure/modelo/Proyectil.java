@@ -3,9 +3,9 @@ package hunterTreasure.modelo;
 public class Proyectil {
     private int posicionXDisparo;
     private int posicionYDisparo;
-    private final int velocidadXDisparo;
-    private final int velocidadYDisparo;
-    private final int tamanoDisparo;
+    private int velocidadXDisparo;
+    private int velocidadYDisparo;
+    private int tamanoDisparo;
 
     public Proyectil(int posicionXDisparo, int posicionYDisparo, int velocidadXDisparo, int velocidadYDisparo, int tamanoDisparo) {
         this.posicionXDisparo = posicionXDisparo;

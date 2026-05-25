@@ -4,25 +4,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class GameOver extends JPanel {
+public class GameVictory extends JPanel {
 
     private Image imagenFondo;
 
-    public GameOver(PrincipalWindow principalWindow, String nombreUsuario) {
+    public GameVictory(PrincipalWindow principalWindow, String nombreUsuario) {
         imagenFondo = new ImageIcon(Objects.requireNonNull(getClass().getResource(
-                "/imagenes/elementosJuego/died.png"))).getImage();
+                "/imagenes/elementosJuego/winner.jpg"))).getImage();
         setLayout(null);
 
         JButton botonReintentar = new JButton("Intentar de nuevo");
         botonReintentar.setFocusable(false);
-        botonReintentar.setBounds(300, 500, 200, 50);
+        botonReintentar.setBounds(300, 530, 200, 50);
         add(botonReintentar);
         botonReintentar.addActionListener(_ -> principalWindow.cambiarPanel(
                 new VistaJuego(principalWindow, nombreUsuario)));
 
         JButton botonSalir = new JButton("Salir");
         botonSalir.setFocusable(false);
-        botonSalir.setBounds(300, 580, 200, 50);
+        botonSalir.setBounds(300, 600, 200, 50);
         add(botonSalir);
         botonSalir.addActionListener(_ -> System.exit(0));
     }

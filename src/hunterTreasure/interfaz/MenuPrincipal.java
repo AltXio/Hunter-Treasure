@@ -6,11 +6,12 @@ import java.util.Objects;
 
 public class MenuPrincipal extends JPanel {
 
-    private final Image IMAGENFONDO;
+    private Image imagenFondo;
 
     public MenuPrincipal(PrincipalWindow principalWindow) {
-        ImageIcon fondo = new ImageIcon(Objects.requireNonNull(getClass().getResource("/imagenes/ElementosJuego/fondoMenu.jpg")));
-        IMAGENFONDO = fondo.getImage();
+        ImageIcon fondo = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/ElementosJuego/fondoMenu.jpg")));
+        imagenFondo = fondo.getImage();
         setLayout(null);
 
         JButton botonStart = new JButton("Empezar");
@@ -18,8 +19,8 @@ public class MenuPrincipal extends JPanel {
         botonStart.setBounds(300, 300, 200, 50);
         add(botonStart);
         botonStart.addActionListener(_ -> {
-                String nombreUsuario = JOptionPane.showInputDialog("Introduce tu nombre: ");
-                principalWindow.cambiarPanel(new VistaJuego(principalWindow, nombreUsuario));
+            String nombreUsuario = JOptionPane.showInputDialog("Introduce tu nombre: ");
+            principalWindow.cambiarPanel(new VistaJuego(principalWindow, nombreUsuario));
         });
 
         JButton botonInstrucciones = new JButton("Instrucciones");
@@ -27,16 +28,16 @@ public class MenuPrincipal extends JPanel {
         botonInstrucciones.setBounds(300, 375, 200, 50);
         add(botonInstrucciones);
         botonInstrucciones.addActionListener(_ ->
-        JOptionPane.showMessageDialog(this,
-                "<html>"+
-                        "<b>MOVIMIENTO:</b<br><br>" +
-                        " Arriba &uarr;<br>" +
-                        " Abajo &darr;<br>" +
-                        " Izquierda &larr;<br>" +
-                        " Derecha &rarr;<br><br>" +
-                        " Derrota a todos los enemigos para ganar."+
-                        "</html>"
-        ));
+                JOptionPane.showMessageDialog(this,
+                        "<html>" +
+                                "<b>MOVIMIENTO:</b<br><br>" +
+                                " Arriba &uarr;<br>" +
+                                " Abajo &darr;<br>" +
+                                " Izquierda &larr;<br>" +
+                                " Derecha &rarr;<br><br>" +
+                                " Derrota a todos los enemigos para ganar." +
+                                "</html>"
+                ));
 
         JButton botonSalir = new JButton("Salir");
         botonSalir.setFocusable(false);
@@ -48,6 +49,6 @@ public class MenuPrincipal extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(IMAGENFONDO, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(imagenFondo, 0, 0, getWidth(), getHeight(), this);
     }
 }
