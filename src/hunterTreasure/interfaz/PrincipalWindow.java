@@ -16,10 +16,8 @@ public class PrincipalWindow extends JFrame {
         Image icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(
                 "/imagenes/ElementosJuego/logotipo.jpg"))).getImage();
         setIconImage(icon);
+        cambiarPanel(new MenuPrincipal(this));
         setVisible(true);
-
-        MenuPrincipal menuPrincipal = new MenuPrincipal(this);
-        cambiarPanel(menuPrincipal);
     }
 
     public void cambiarPanel(JPanel panel) {

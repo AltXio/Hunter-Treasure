@@ -1,13 +1,14 @@
 package hunterTreasure.modelo;
 
 public class Proyectil {
+    private final int velocidadXDisparo;
+    private final int velocidadYDisparo;
+    private final int tamanoDisparo;
     private int posicionXDisparo;
     private int posicionYDisparo;
-    private int velocidadXDisparo;
-    private int velocidadYDisparo;
-    private int tamanoDisparo;
 
-    public Proyectil(int posicionXDisparo, int posicionYDisparo, int velocidadXDisparo, int velocidadYDisparo, int tamanoDisparo) {
+    public Proyectil(int posicionXDisparo, int posicionYDisparo, int velocidadXDisparo,
+                     int velocidadYDisparo, int tamanoDisparo) {
         this.posicionXDisparo = posicionXDisparo;
         this.posicionYDisparo = posicionYDisparo;
         this.velocidadXDisparo = velocidadXDisparo;
@@ -20,15 +21,7 @@ public class Proyectil {
         this.posicionYDisparo += velocidadYDisparo;
     }
 
-    public int getPosicionXDisparo() {
-        return posicionXDisparo;
-    }
-
-    public int getPosicionYDisparo() {
-        return posicionYDisparo;
-    }
-
-    public int getTamanoDisparo() {
-        return tamanoDisparo;
-    }
+    public int getPosicionXDisparo() { return posicionXDisparo; }
+    public int getPosicionYDisparo() { return posicionYDisparo; }
+    public int getTamanoDisparo() { return tamanoDisparo; }
 }

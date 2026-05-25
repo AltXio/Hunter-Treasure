@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class GameOver extends JPanel {
 
-    private Image imagenFondo;
+    private final Image imagenFondo;
 
     public GameOver(PrincipalWindow principalWindow, String nombreUsuario) {
         imagenFondo = new ImageIcon(Objects.requireNonNull(getClass().getResource(

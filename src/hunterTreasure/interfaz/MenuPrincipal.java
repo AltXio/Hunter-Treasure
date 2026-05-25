@@ -6,12 +6,11 @@ import java.util.Objects;
 
 public class MenuPrincipal extends JPanel {
 
-    private Image imagenFondo;
+    private final Image imagenFondo;
 
     public MenuPrincipal(PrincipalWindow principalWindow) {
-        ImageIcon fondo = new ImageIcon(Objects.requireNonNull(getClass().getResource(
-                "/imagenes/ElementosJuego/fondoMenu.jpg")));
-        imagenFondo = fondo.getImage();
+        imagenFondo = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/imagenes/ElementosJuego/fondoMenu.jpg"))).getImage();
         setLayout(null);
 
         JButton botonStart = new JButton("Empezar");
@@ -19,8 +18,10 @@ public class MenuPrincipal extends JPanel {
         botonStart.setBounds(300, 300, 200, 50);
         add(botonStart);
         botonStart.addActionListener(_ -> {
-            String nombreUsuario = JOptionPane.showInputDialog("Introduce tu nombre: ");
-            principalWindow.cambiarPanel(new VistaJuego(principalWindow, nombreUsuario));
+            String nombreUsuario = JOptionPane.showInputDialog(this, "Introduce tu nombre: ", "Registro de Capitán", JOptionPane.QUESTION_MESSAGE);
+            if (nombreUsuario != null && !nombreUsuario.trim().isEmpty()) {
+                principalWindow.cambiarPanel(new VistaJuego(principalWindow, nombreUsuario.trim()));
+            }
         });
 
         JButton botonInstrucciones = new JButton("Instrucciones");
@@ -30,13 +31,14 @@ public class MenuPrincipal extends JPanel {
         botonInstrucciones.addActionListener(_ ->
                 JOptionPane.showMessageDialog(this,
                         "<html>" +
-                                "<b>MOVIMIENTO:</b<br><br>" +
+                                "<b>MOVIMIENTO:</b><br><br>" +
                                 " Arriba &uarr;<br>" +
                                 " Abajo &darr;<br>" +
                                 " Izquierda &larr;<br>" +
                                 " Derecha &rarr;<br><br>" +
-                                " Derrota a todos los enemigos para ganar." +
-                                "</html>"
+                                " <b>ESPACIO:</b> Disparar proyectiles<br><br>" +
+                                " <i>Encuentra la llave eliminando al enemigo portador y escapa por la puerta del barco.</i>" +
+                                "</html>", "Manual del Pirata", JOptionPane.INFORMATION_MESSAGE
                 ));
 
         JButton botonSalir = new JButton("Salir");

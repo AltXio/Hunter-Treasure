@@ -1,5 +1,6 @@
 package hunterTreasure.interfaz;
 
+import hunterTreasure.datos.ConexionDB;
 import hunterTreasure.modelo.Enemigo;
 import hunterTreasure.modelo.ObjetoColeccionable;
 import hunterTreasure.modelo.Personaje;
@@ -341,13 +342,17 @@ public class VistaJuego extends JPanel {
 
                 if (areaPersonaje.intersects(areaPuerta)) {
                     timer.stop();
+                    ConexionDB.registrarPartida(NOMBRE_USUARIO, puntuacionTotal, enemigosEliminados);
                     principalWindow.cambiarPanel(new GameVictory(principalWindow, NOMBRE_USUARIO));
+                    return;
                 }
             }
 
             if (personaje.getVidaPersonaje() == 0) {
                 timer.stop();
+                ConexionDB.registrarPartida(NOMBRE_USUARIO, puntuacionTotal, enemigosEliminados);
                 principalWindow.cambiarPanel(new GameOver(principalWindow, NOMBRE_USUARIO));
+                return;
             }
 
             repaint();
