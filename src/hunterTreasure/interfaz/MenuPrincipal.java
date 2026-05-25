@@ -36,8 +36,8 @@ public class MenuPrincipal extends JPanel {
                                 " Abajo &darr;<br>" +
                                 " Izquierda &larr;<br>" +
                                 " Derecha &rarr;<br><br>" +
-                                " <b>ESPACIO:</b> Disparar proyectiles<br><br>" +
-                                " <i>Encuentra la llave eliminando al enemigo portador y escapa por la puerta del barco.</i>" +
+                                " <b>ESPACIO:</b> Disparar<br><br>" +
+                                " <i>Encuentra la llave. Elimina a los enemigos y hazte con el <b>TESORO</b></i>" +
                                 "</html>", "Manual del Pirata", JOptionPane.INFORMATION_MESSAGE
                 ));
 
