@@ -1,5 +1,4 @@
 # 🏴‍☠️ Hunter Treasure
---
 
 **Hunter Treasure** es un juego de acción 2D en el que controlas a un pirata que debe sobrevivir a oleadas de enemigos, encontrar la llave del nivel y llegar a la puerta para escapar con el tesoro.
 
@@ -64,7 +63,7 @@ CREATE TABLE IF NOT EXISTS partidas (
 
 3. Verifica que las credenciales en `ConexionDB.java` coincidan con tu instalación de MySQL:
 ```java
-private static final String DB_URL = "jdbc:mysql://localhost:3306/hunter_treasure";
+private static final String DB_URL = "jdbc:mysql://(conexion: `localhost`)(puerto: `3306`)/hunter_treasure";
 private static final String USER = "root";
 private static final String PASSWORD = "tu_contraseña";
 ```
@@ -72,11 +71,11 @@ private static final String PASSWORD = "tu_contraseña";
 ---
 > [!TIP]
 > ## 🚀 Instrucciones para ejecutar
-> ### Ejecutar el archivo .jar
+ ### Ejecutar el archivo .jar
 
-> [IMPORTANT]
+> [!IMPORTANT]
 > Asegúrate de tener **Java 21 o superior** instalado
-1. Descarga el archivo `HunterTreasure.jar` desde la sección [Releases](/AltXio/Hunter-Treasure/releases/tag/v1.0)
+1. Descarga el archivo `HunterTreasure.jar` desde la sección [Releases](https://github.com/AltXio/Hunter-Treasure/releases/tag/v1.0)
 2. Ejecuta el JAR desde la terminal:
 
 ```bash
@@ -98,20 +97,12 @@ O simplemente haz **doble clic** sobre el archivo `.jar` si tu sistema operativo
 
 ## 📸 Un poco de Hunter Treasure...
 
-### Menú principal
 <img width="983" height="867" alt="image" src="https://github.com/user-attachments/assets/c608c1de-cca9-4a4a-bc06-1255ac9389be" />
 
-### Pantalla de juego
-![Gameplay](<img width="984" height="867" alt="Hunter Treasure Preview" src="https://github.com/user-attachments/assets/5eee3be0-88e5-440d-bcbf-0cb907919f1e" />)
-
-### Game Over
-<img width="983" height="867" alt="image" src="https://github.com/user-attachments/assets/8d43fffe-b419-4d43-bbf1-709c6c8cf9cd" />
-
-### Victoria
-<img width="983" height="867" alt="image" src="https://github.com/user-attachments/assets/ed09e7b0-d665-4c1b-90fd-872ea2a1eec9" />
+<img width="984" height="867" alt="Hunter Treasure Preview" src="https://github.com/user-attachments/assets/5eee3be0-88e5-440d-bcbf-0cb907919f1e" />
 
 ---
 
 ## 📄 Licencia
----
+
 MIT
